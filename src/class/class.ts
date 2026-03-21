@@ -19,6 +19,7 @@ abstract class Person {
 }
 
 class Teacher extends Person{
+    private static instance: Teacher;
     get subject(): string {
         if (!this._subject) {
             throw new Error('There is no subject.');
@@ -31,16 +32,24 @@ class Teacher extends Person{
         }
         this._subject = value;
     }
-    constructor(name: string, age: number, private _subject: string) {
+    private constructor(name: string, age: number, private _subject: string) {
         super(name, age);
+    }
+
+    static getInstance(name: string, age: number, subject: string) {
+        if (Teacher.instance) return Teacher.instance;
+        Teacher.instance = new Teacher(name, age, subject);
+        return this.instance;
     }
     explainJob() {
         console.log(`I teach ${this.subject}.`);
     }
 }
-const teacher = new Teacher('Taka', 40, 'Math');
+const teacher = Teacher.getInstance('Taka', 40, 'Math');
 teacher.subject = 'Music';
 teacher.greeting();
+const teacher2 = Teacher.getInstance('Hiro', 38, 'Music');
+teacher2.greeting();
 
 console.log(Person.species);
 console.log(Person.isAdult(18));
