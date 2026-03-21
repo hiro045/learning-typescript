@@ -1,11 +1,6 @@
 class Person {
-    name: string;
-    private age: number;
 
-    constructor(initName: string, initAge: number) {
-        this.name = initName;
-        this.age = initAge;
-    }
+    constructor(public name: string, private age: number){}
 
     greeting(this: Person) {
         console.log(`Hello! My name is ${this.name}. I am ${this.age} years old.`);
