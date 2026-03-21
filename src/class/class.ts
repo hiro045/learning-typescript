@@ -1,6 +1,6 @@
 class Person {
 
-    constructor(public name: string, private age: number){}
+    constructor(public readonly name: string, private age: number){}
 
     greeting(this: Person) {
         console.log(`Hello! My name is ${this.name}. I am ${this.age} years old.`);
